@@ -152,7 +152,7 @@ module SendGrid
     # Set custom substitions
     if @sg_substitutions && !@sg_substitutions.empty?
       @sg_substitutions.each do |find, replace|
-        raise ArgumentError.new("Array for #{find} is not the same size as the recipient array") if replace.size != header_opts[:to].size
+        raise ArgumentError.new("Array for #{find} is not the same size as the recipient array") unless header_opts[:to] and replace.size == header_opts[:to].size
       end
 
       header_opts[:sub] = @sg_substitutions
